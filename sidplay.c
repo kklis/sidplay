@@ -16,8 +16,6 @@ int main() {
          "JSR $FFBA\n\t"  // SETLFS
          "LDA #$00\n\t"   // load to memory
          "JSR $FFD5\n\t"  // LOAD
-         "LDA #$01\n\t"   // logical file number
-         "JSR $FFC3"      // CLOSE
          :: "a"(fnamelen), "x"(fnamelo), "y"(fnamehi));
     // Init SID player routine
     asm ("LDA #$00\n\t"
