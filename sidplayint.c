@@ -20,6 +20,8 @@ int main() {
     unsigned char fnamehi = (unsigned int)fname >> 8;
     unsigned char fnamelen = strlen(fname);
     void (* fun)(void) = &play;
+    unsigned char funlo = (unsigned int)fun & 0xFFFF;
+    unsigned char funhi = (unsigned int)fun >> 8;
 
     // Load SID file into memory
     asm("JSR $FFBD\n\t"  // SETNAM (A = fname lenght, XY = fname address)
@@ -38,14 +40,14 @@ int main() {
         "JSR $1000");
 
     // Set up raster interrupt
-    asm("SEI");         // switch off interrupts
-    intctrl = 0x7F;     // disable CIA interrupts
-    rasterintctrl = 1;  // enable raster interrupts
-    rasterintlo = (unsigned int)fun & 0xFFFF; // low byte of raster interrupt routine
-    rasterinthi = (unsigned int)fun >> 8;     // high byte of raster interrupt routine
-    rasterline = 127;   // trigger interrupt at raster line 127
-    screenctrl = screenctrl & 0x7F;  // ignore rasterlines > 255
-    asm("CLI");         // switch on interrupts
+    asm("SEI");           // switch off interrupts
+    intctrl = 0x7F;       // disable CIA interrupts
+    rasterintctrl = 1;    // enable raster interrupts
+    rasterintlo = funlo;  // low byte of raster interrupt routine
+    rasterinthi = funhi;  // high byte of raster interrupt routine
+    rasterline = 127;     // trigger interrupt at raster line 127
+    screenctrl = screenctrl & 0x7F;
+    asm("CLI");           // switch on interrupts
 
     return 0;
 }
