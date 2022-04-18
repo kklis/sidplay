@@ -12,4 +12,4 @@ To run the program:
 
 Ginger is a tune by Kristian Røstøen and comes form the [High Voltage SID Collection](https://www.hvsc.c64.org/).
 
-Read more about the project [here](https://weblambdazero.blogspot.com/2022/04/llvm-mos-sid-player-for-commodore-64.html).
+Read more about the project [here](https://weblambdazero.blogspot.com/2022/04/llvm-mos-sid-player-for-commodore-64.html) and [here](https://weblambdazero.blogspot.com/2022/04/embedding-data-in-executable-with-llvm.html).
